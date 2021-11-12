@@ -40,7 +40,7 @@ app.use(
  *      200:
  */
 app.get('/', (req, res) => {
-  res.send('Hello World ')
+  res.send('Hello World')
 })
 
 app.listen(port, () => {
