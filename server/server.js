@@ -4,6 +4,7 @@ import { connectDb } from './services/database/connection'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsDoc from 'swagger-jsdoc'
 import { SwaggerOptions } from './documentation/swagger'
+import Router from './router'
 
 dotenv.config()
 const app = express()
@@ -11,6 +12,8 @@ const port = 8000
 //connect to db
 connectDb()
 
+
+Router(app)
 
 //create doc
 const specs = swaggerJsDoc(SwaggerOptions)
