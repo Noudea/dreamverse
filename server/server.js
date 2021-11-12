@@ -7,12 +7,13 @@ import { SwaggerOptions } from './documentation/swagger'
 
 dotenv.config()
 const app = express()
-const port = 3000
+const port = 8000
+//connect to db
 connectDb()
 
 
-const specs = swaggerJsDoc(SwaggerOptions);
-
+//create doc
+const specs = swaggerJsDoc(SwaggerOptions)
 app.use(
   "/api-docs",
   swaggerUi.serve,
@@ -35,10 +36,10 @@ app.use(
  *    responses:
  *      200:
  */
-app.get('/helloWorld', (req, res) => {
-  res.send('Hello World')
+app.get('/', (req, res) => {
+  res.send('Hello World ')
 })
 
 app.listen(port, () => {
-  console.log(`Dreamverse server listening at http://localhost:${port}`)
+  console.log(`Dreamverse server listening at http://localhost:${8000}`)
 })

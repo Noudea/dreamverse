@@ -1,0 +1,80 @@
+version: "3.7"
+services:
+  dreamverse:
+    container_name: dreamverse-server
+    image: bitnami/node
+    command: sh -c 'yarn install && yarn run dev'
+    working_dir: /dreamverse
+    ports: 
+      - 8000:8000
+    volumes:
+      - ./server:/dreamverse
+    depends_on:
+      - mongodb
+    networks:
+      - dreamverse-network
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    env_file:
+      - ./server/development.env
+    
+  mongodb:
+    container_name: dreamverse-mongodb
+    image : bitnami/mongodb:latest
+    ports:
+      - 27016:27017
+    environment:
+      - MONGODB_ROOT_USER=admin
+      - MONGODB_ROOT_PASSWORD=password
+      - MONGODB_USERNAME=dreamverse
+      - MONGODB_PASSWORD=password
+      - MONGODB_DATABASE=dreamverse
+    volumes:
+      - dreamverse-mongodb-data:/bitnami/mongodb
+    networks:
+      - dreamverse-network
+
+  dreamverse-front:
+    container_name: dreamverse-front
+    image: bitnami/node
+    working_dir: /dreamverse-front
+    command: sh -c 'yarn install && yarn run dev'
+    ports: 
+      - 3000:3000
+    volumes:
+      - ./vercel:/dreamverse-front
+    networks:
+      - dreamverse-network
+
+  apache:
+    container_name: dreamverse-apache
+    image: bitnami/apache:latest
+    ports:
+      - 80:8080
+      - 443:8443
+    volumes:
+    - ./apache/vhosts:/vhosts:ro
+    depends_on:
+      - mongodb
+      - dreamverse
+      - dreamverse-front
+    networks:
+      - dreamverse-network
+  
+  portainer:
+    container_name: dreamverse-portainer
+    image: portainer/portainer-ce:latest
+    command: -H unix:///var/run/docker.sock
+    ports: 
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - dreamverse-portainer-data:/data
+
+volumes:
+  dreamverse-mongodb-data:
+  dreamverse-portainer-data:
+networks:
+  dreamverse-network:
