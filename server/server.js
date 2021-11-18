@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJsDoc from 'swagger-jsdoc'
 import { SwaggerOptions } from './documentation/swagger'
 import Router from './router'
+import bodyParser from 'body-parser'
 
 dotenv.config()
 const app = express()
@@ -12,6 +13,10 @@ const port = 8000
 //connect to db
 connectDb()
 
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 
 Router(app)
 

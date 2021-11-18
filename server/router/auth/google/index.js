@@ -1,8 +1,9 @@
 import express from 'express'
-import googleAuthRoutes from './google'
 
 const router = express.Router()
 
-router.use('/google',googleAuthRoutes)
+router.post('/register', async (req,res) => {
+
+})
 
 export default router
