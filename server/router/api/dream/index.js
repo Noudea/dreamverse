@@ -1,21 +1,17 @@
 import express from 'express'
 
-
 const router = express.Router()
 
-router.get('/',async (req,res) => {
+router.get('/', async (req, res) => {
   return res.status(200).json({
-    data : 'test'
+    data: 'test'
   })
 })
 
-router.post(`/`,async (req, res) => {
+router.post('/', async (req, res) => {
   return res.status(201).json({
-    success : req.body
+    success: req.body
   })
 })
-
-
-
 
 export default router

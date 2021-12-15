@@ -10,23 +10,23 @@ import bodyParser from 'body-parser'
 dotenv.config()
 const app = express()
 const port = 8000
-//connect to db
+// connect to db
 connectDb()
 
-app.use(express.json());
+app.use(express.json())
 app.use(express.urlencoded({
   extended: true
-}));
+}))
 
 Router(app)
 
-//create doc
+// create doc
 const specs = swaggerJsDoc(SwaggerOptions)
 app.use(
-  "/api-docs",
+  '/api-docs',
   swaggerUi.serve,
   swaggerUi.setup(specs)
-);
+)
 
 /**
  * @swagger
