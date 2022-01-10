@@ -3,27 +3,24 @@ const { Schema } = mongoose
 
 const DreamSchema = new Schema({
   title: {
-    type: String
+    type: String,
+    required: true
   },
-  content:{
+  content: {
     type: String
   },
   description: {
-    type: String,
+    type: String
   },
   tag: {
     type: String,
-    enum : ['lucid','nightmare']
-  },
-  public: {
-    type: Boolean,
-    default : false
+    enum: ['lucid', 'nightmare']
   },
   user: {
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }
-},{timestamps: true})
+}, { timestamps: true })
 
-const DreamModel = mongoose.model('Dream',DreamSchema)
+const DreamModel = mongoose.model('Dream', DreamSchema)
 
 export default DreamModel

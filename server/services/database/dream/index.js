@@ -1,11 +1,21 @@
 import DreamModel from '../../../models/Dream'
 
 const getDream = async (filter) => {
-  return await DreamModel.find(filter).exec()
+  const dream = await DreamModel.find(filter).exec()
+  if (dream.length === 0) {
+    return false
+  }
+  return dream
 }
 
 const createDream = async (dream) => {
-  return await DreamModel.create(dream)
+  const createdDream = await DreamModel.create(dream)
+  return createdDream
 }
 
-export { getDream, createDream }
+const deleteDream = async (dreamId) => {
+  const deletedDream = await DreamModel.findByIdAndDelete(dreamId)
+  return deletedDream
+}
+
+export { getDream, createDream, deleteDream }
