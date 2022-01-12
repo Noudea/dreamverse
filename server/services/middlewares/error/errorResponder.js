@@ -7,6 +7,14 @@ const errorResponder = (error, req, res, next) => {
       }
     })
   }
+  if (error.message === 'invalid_request') {
+    return res.status(422).json({
+      error: {
+        name: error.message,
+        description: 'invalid body request'
+      }
+    })
+  }
   next(error)
 }
 

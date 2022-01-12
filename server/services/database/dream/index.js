@@ -3,7 +3,8 @@ import DreamModel from '../../../models/Dream'
 const getDream = async (filter) => {
   const dream = await DreamModel.find(filter).exec()
   if (dream.length === 0) {
-    return false
+    throw new Error('missing_ressource')
+    // return false
   }
   return dream
 }

@@ -9,6 +9,11 @@ const router = express.Router()
 router.get('/:dreamId', async (req, res, next) => {
   try {
     const dreamId = req.params.dreamId
+
+    if (!dreamId) {
+      throw new Error('invalid_request')
+    }
+
     const dream = await getDream({ _id: dreamId })
 
     if (!dream) {
@@ -27,8 +32,9 @@ router.get('/:dreamId', async (req, res, next) => {
  */
 router.post('/', async (req, res, next) => {
   try {
+    // request body
     const { title, content, description, tag, user } = req.body
-
+    // dream object
     const dream = {
       title: title,
       content: content,
@@ -36,9 +42,13 @@ router.post('/', async (req, res, next) => {
       tag: tag,
       user: user
     }
-
+    // data validation
+    if (!title || !content || !description) {
+      throw new Error('invalid_request')
+    }
+    // create dream
     const createdDream = await createDream(dream)
-
+    // send response
     return res.status(201).json({
       success: createdDream
     })
@@ -63,8 +73,13 @@ router.delete('/', async (req, res, next) => {
   try {
     const dreamId = req.body.dreamId
 
+    if (!dreamId) {
+      throw new Error('invalid_request')
+    }
     const deletedDream = await deleteDream(dreamId)
-
+    if (!deletedDream) {
+      throw new Error('missing_ressource')
+    }
     return res.status(200).json({
       success: deletedDream
     })
@@ -72,4 +87,5 @@ router.delete('/', async (req, res, next) => {
     next(error)
   }
 })
+
 export default router
