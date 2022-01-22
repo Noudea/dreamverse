@@ -4,4 +4,4 @@ const color = {
   iconColor: '#454960'
 }
 
-export {color}
+export { color }

@@ -1,5 +1,5 @@
 {
   "watch": ["./"],
-  "exec": "node --experimental-specifier-resolution=node server.js",
+  "exec": "GOOGLE_APPLICATION_CREDENTIALS='dreamverse-service-account.json' node --experimental-specifier-resolution=node server.js",
   "ext": "js"
 }
