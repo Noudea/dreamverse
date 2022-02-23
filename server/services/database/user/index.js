@@ -3,12 +3,16 @@ import UserModel from '../../../models/User'
 const getUser = async (filter) => {
   const user = await UserModel.find(filter).exec()
   if (user.length === 0) {
-    throw new Error('missing_ressource')
-    // return false
+    // throw new Error('missing_ressource')
+    return false
   }
-  return user
+  return user[0]
 }
 
+const updateUser = async (filter, update) => {
+  const updatedUser = await UserModel.findOneAndUpdate(filter, update, { new: true })
+  return updatedUser
+}
 const createUser = async (user) => {
   const createdUser = await UserModel.create(user)
   return createdUser
@@ -19,4 +23,4 @@ const deleteUser = async (userId) => {
   return createdUser
 }
 
-export { getUser, createUser, deleteUser }
+export { getUser, createUser, deleteUser, updateUser }

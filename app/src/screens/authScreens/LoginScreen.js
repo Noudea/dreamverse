@@ -1,24 +1,37 @@
 import React, { useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import Button from '../components/atomes/buttons/Button'
-import IconInput from '../components/atomes/inputs/IconInput'
-import WithMargin from '../components/templates/WithMargin'
-import { color } from '../theme'
+import Button from '../../components/atomes/buttons/Button'
+import IconInput from '../../components/atomes/inputs/iconInput/IconInput'
+import { color } from '../../theme'
+import WithMargin from '../../components/templates/WithMargin'
+import axios from 'axios'
+import { loginUser, useAuth } from '../../contexts/authContext/AuthContext'
 
-const SignUpScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    phoneNumber: ''
+    email: 'test@gmail.com',
+    password: 'testtest'
   })
 
-  const submit = () => {
-    console.log(formData)
+  const { dispatch } = useAuth()
+
+  const submit = async () => {
+    try {
+      console.log(formData)
+
+      loginUser({
+        user: 'user',
+        token: 'dsqdjqskdnqsdnlsqdsqdqsdqsdqdqs'
+      }, dispatch)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const goToLoginScreen = () => {
-    navigation.navigate('Login')
+  const goToSignUpScreen = async () => {
+    navigation.navigate('SignUp')
   }
+
   return (
     <View style={styles.view}>
       <WithMargin margin={{ bottom: 40 }}>
@@ -28,7 +41,8 @@ const SignUpScreen = ({ navigation }) => {
       <WithMargin margin={{ bottom: 12 }}>
         <IconInput
           placeholder='Email address'
-          name='mail' type='feather'
+          name='mail'
+          type='feather'
           onChangeText={(e) => {
             setFormData({ ...formData, email: e })
           }}
@@ -44,26 +58,16 @@ const SignUpScreen = ({ navigation }) => {
           }}
         />
       </WithMargin>
-      <WithMargin margin={{ bottom: 12 }}>
-        <IconInput
-          placeholder='Password'
-          name='smartphone'
-          type='feather'
-          onChangeText={(e) => {
-            setFormData({ ...formData, phoneNumber: e })
-          }}
-        />
-      </WithMargin>
       <Button
         onPress={submit}
-        title='Sign up'
+        title='Sign in'
         style={styles.submitButton}
         textStyle={styles.buttonText}
-        accessibilityLabel='Sign Up'
+        accessibilityLabel='Sign In'
       />
       <Text style={styles.textGrey}>Don't have an account ?</Text>
-      <Pressable onPress={goToLoginScreen}>
-        <Text style={styles.text}>Sign In</Text>
+      <Pressable onPress={goToSignUpScreen}>
+        <Text style={styles.text}>Sign up</Text>
       </Pressable>
     </View>
   )
@@ -132,6 +136,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white'
   }
+
 })
 
-export default SignUpScreen
+export default LoginScreen

@@ -15,6 +15,41 @@ const errorResponder = (error, req, res, next) => {
       }
     })
   }
+  if (error.message === 'user_already_exist') {
+    return res.status(409).json({
+      error: {
+        name: error.message,
+        description: 'user already exist'
+      }
+    })
+  }
+
+  // if (error.name === 'TokenExpiredError') {
+  //   return res.status(409).json({
+  //     error: {
+  //       name: error.name,
+  //       description: error.message
+  //     }
+  //   })
+  // }
+
+  // if (error.message === 'invalid_token') {
+  //   return res.status(409).json({
+  //     error: {
+  //       name: 'invalid_token',
+  //       description: 'invalid_token'
+  //     }
+  //   })
+  // }
+
+  if (error.message === 'invalid_authentication') {
+    return res.status(401).json({
+      error: {
+        name: 'invalid_authentication',
+        description: 'invalid_authentication'
+      }
+    })
+  }
   next(error)
 }
 

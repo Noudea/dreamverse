@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import Button from '../components/atomes/buttons/Button'
-import IconInput from '../components/atomes/inputs/IconInput'
-import { color } from '../theme'
-import WithMargin from '../components/templates/WithMargin'
+import Button from '../../components/atomes/buttons/Button'
+import IconInput from '../../components/atomes/inputs/iconInput/IconInput'
+import WithMargin from '../../components/templates/WithMargin'
+import { color } from '../../theme'
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
+    phoneNumber: ''
   })
 
   const submit = () => {
     console.log(formData)
   }
 
-  const goToSignUpScreen = () => {
-    navigation.navigate('SignUp')
+  const goToLoginScreen = () => {
+    navigation.navigate('Login')
   }
-
   return (
     <View style={styles.view}>
       <WithMargin margin={{ bottom: 40 }}>
@@ -28,8 +28,7 @@ const LoginScreen = ({ navigation }) => {
       <WithMargin margin={{ bottom: 12 }}>
         <IconInput
           placeholder='Email address'
-          name='mail'
-          type='feather'
+          name='mail' type='feather'
           onChangeText={(e) => {
             setFormData({ ...formData, email: e })
           }}
@@ -45,16 +44,26 @@ const LoginScreen = ({ navigation }) => {
           }}
         />
       </WithMargin>
+      <WithMargin margin={{ bottom: 12 }}>
+        <IconInput
+          placeholder='Password'
+          name='smartphone'
+          type='feather'
+          onChangeText={(e) => {
+            setFormData({ ...formData, phoneNumber: e })
+          }}
+        />
+      </WithMargin>
       <Button
         onPress={submit}
-        title='Sign in'
+        title='Sign up'
         style={styles.submitButton}
         textStyle={styles.buttonText}
-        accessibilityLabel='Sign In'
+        accessibilityLabel='Sign Up'
       />
       <Text style={styles.textGrey}>Don't have an account ?</Text>
-      <Pressable onPress={goToSignUpScreen}>
-        <Text style={styles.text}>Sign up</Text>
+      <Pressable onPress={goToLoginScreen}>
+        <Text style={styles.text}>Sign In</Text>
       </Pressable>
     </View>
   )
@@ -123,7 +132,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white'
   }
-
 })
 
-export default LoginScreen
+export default SignUpScreen
