@@ -1,5 +1,12 @@
 import { getUser } from '../../database/user'
 import { createAccessToken, verifyAccessToken, verifyRefreshToken } from '../../token'
+
+/**
+ * check if the user is authenticated by checking the access token and refresh token
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 const isAuthenticated = async (req, res, next) => {
   try {
     let token = req.get('authorization')

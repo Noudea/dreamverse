@@ -6,6 +6,9 @@ import { createAccessToken, createRefreshToken } from '../../../services/token'
 
 const router = express.Router()
 
+/**
+ * signup api route, this route is used to register an user
+ */
 router.post('/signup', async (req, res, next) => {
   try {
     const { email, password } = req.body
@@ -30,24 +33,27 @@ router.post('/signup', async (req, res, next) => {
   }
 })
 
+/**
+ * signin api route, this route is used to login an user
+ */
 router.post('/signin', async (req, res, next) => {
   try {
     const { email, password } = req.body
-
     const user = await getUser({ email })
-
-    console.log(user)
 
     if (!user) {
       throw new Error('missing_ressource')
     }
 
+    // verify password
     const verifyPass = verifyPassword(password, user.password)
     if (!verifyPass) {
       throw new Error('invalid_authentication')
     }
+
+    // update de the refresh token
     const updatedUser = await updateUser({ email }, { refreshToken: createRefreshToken({ email }) })
-    console.log(updatedUser)
+
     return res.status(200).json({
       success: 'success signin',
       refreshToken: updatedUser.refreshToken,
