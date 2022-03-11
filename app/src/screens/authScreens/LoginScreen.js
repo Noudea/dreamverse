@@ -4,27 +4,25 @@ import Button from '../../components/atomes/buttons/Button'
 import IconInput from '../../components/atomes/inputs/iconInput/IconInput'
 import { color } from '../../theme'
 import WithMargin from '../../components/templates/WithMargin'
-import axios from 'axios'
 import { loginUser, useAuth } from '../../contexts/authContext/AuthContext'
-
+import { customAxios } from '../../services/api'
 const LoginScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
-    email: 'test@gmail.com',
-    password: 'testtest'
+    email: 'tests@dreamverse.com',
+    password: 'test'
   })
 
   const { dispatch } = useAuth()
 
   const submit = async () => {
     try {
-      console.log(formData)
-
+      const { data } = await customAxios.post('/auth/dreamverse/signin', formData)
       loginUser({
-        user: 'user',
-        token: 'dsqdjqskdnqsdnlsqdsqdqsdqsdqdqs'
+        user: data.user,
+        accessToken: data.accessToken
       }, dispatch)
     } catch (error) {
-      console.log(error)
+      console.log('test', error.response.data)
     }
   }
 

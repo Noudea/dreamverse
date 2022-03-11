@@ -1,5 +1,6 @@
 import express from 'express'
 import { createDream, deleteDream, getDream } from '../../../services/database/dream'
+import { decodeAccessToken } from '../../../services/token'
 
 const router = express.Router()
 
@@ -33,24 +34,27 @@ router.get('/:dreamId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     // request body
-    const { title, content, description, tag, user } = req.body
+    const { title, content, description, tags, category } = req.body
+    console.log('access token', req.accessToken)
     // dream object
-    const dream = {
+    const dreamObj = {
       title: title,
       content: content,
       description: description,
-      tag: tag,
-      user: user
+      tags: tags,
+      category: category,
+      user: await decodeAccessToken(req.accessToken).user.id
     }
     // data validation
     if (!title || !content || !description) {
       throw new Error('invalid_request')
     }
     // create dream
-    const createdDream = await createDream(dream)
+    const dream = await createDream(dreamObj)
     // send response
     return res.status(201).json({
-      success: createdDream
+      dream,
+      accessToken: req.accessToken
     })
   } catch (error) {
     next(error)

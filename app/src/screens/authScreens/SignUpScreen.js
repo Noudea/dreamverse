@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Button from '../../components/atomes/buttons/Button'
 import IconInput from '../../components/atomes/inputs/iconInput/IconInput'
 import WithMargin from '../../components/templates/WithMargin'
+import { customAxios } from '../../services/api'
 import { color } from '../../theme'
 
 const SignUpScreen = ({ navigation }) => {
@@ -12,8 +13,13 @@ const SignUpScreen = ({ navigation }) => {
     phoneNumber: ''
   })
 
-  const submit = () => {
+  const submit = async () => {
     console.log(formData)
+    const { data } = await customAxios.post('/auth/dreamverse/signup', formData)
+    console.log(data)
+    if (data.success) {
+      navigation.navigate('Login')
+    }
   }
 
   const goToLoginScreen = () => {

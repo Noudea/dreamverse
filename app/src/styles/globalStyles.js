@@ -3,9 +3,10 @@ import { color } from '../theme'
 
 const globalStyles = StyleSheet.create({
   screenContainer: {
-    padding: 20,
+    padding: 40,
     backgroundColor: color.backgroundColor,
-    color: color.textColor
+    color: color.textColor,
+    height: '100%'
   }
 })
 

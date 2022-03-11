@@ -5,21 +5,25 @@ import DreamBadge from '../../atomes/badges/dreamBadge/DreamBadge'
 import RowList from '../../templates/lists/rowList/RowList'
 import styles from './styles'
 
-function DreamCard ({ title, content, category, date }) {
+function DreamCard ({ title, content, tags, date }) {
   return (
     <Pressable>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>{title}</Text>
           <Text style={styles.date}>{moment(date).format('MMMM Do')}</Text>
+          <View style={styles.badgeContainer}>
+            <RowList listItems={tags.map((item, index) => {
+              return <DreamBadge key={index} id={index} category={item} />
+            })}
+            />
+          </View>
         </View>
-        <View style={styles.badgeContainer}>
-          <RowList listItems={category.map((item, index) => {
-            return <DreamBadge key={index} id={index} category={item} />
-          })}
-          />
-        </View>
-        <Text style={styles.text}>{content}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <RowList listItems={tags.map((item, index) => {
+          return <DreamBadge key={index} id={index} category={item} />
+        })}
+        />
+        {/* <Text style={styles.text}>{content}</Text> */}
       </View>
     </Pressable>
   )

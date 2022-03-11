@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken'
 
 /**
  *
- * @param {Object} user
+ * @param {Object} payload
  * @returns {String} refresh token
  */
-const createRefreshToken = (user) => {
-  const refreshToken = jwt.sign({ user }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '10m' })
+const createRefreshToken = (payload) => {
+  const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '10m' })
   return refreshToken
 }
 
@@ -27,6 +27,16 @@ const createAccessToken = (user) => {
  */
 const verifyRefreshToken = (token) => {
   const decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET)
+  return decoded
+}
+
+/**
+ *
+ * @param {String} token refresh token to decode
+ * @returns {Object} decoded token
+ */
+const decodeRefreshToken = (token) => {
+  const decoded = jwt.decode(token, process.env.REFRESH_TOKEN_SECRET)
   return decoded
 }
 
@@ -63,4 +73,4 @@ const verifyAccessToken = (token) => {
 
   return decodedToken
 }
-export { createRefreshToken, createAccessToken, verifyRefreshToken, decodeAccessToken, verifyAccessToken }
+export { createRefreshToken, createAccessToken, verifyRefreshToken, decodeAccessToken, verifyAccessToken, decodeRefreshToken }

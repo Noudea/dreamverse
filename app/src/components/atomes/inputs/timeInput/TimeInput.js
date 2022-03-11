@@ -2,7 +2,7 @@ import React from 'react'
 import { Pressable, Text, View } from 'react-native'
 import styles from './styles'
 
-function DateButton ({ onPress, date }) {
+function TimeInput ({ onPress, date }) {
   return (
     <Pressable
       onPress={onPress}
@@ -16,4 +16,4 @@ function DateButton ({ onPress, date }) {
   )
 }
 
-export default DateButton
+export default TimeInput

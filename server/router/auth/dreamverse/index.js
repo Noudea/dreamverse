@@ -20,8 +20,7 @@ router.post('/signup', async (req, res, next) => {
 
     const user = {
       email: email,
-      password: hashPassword(password),
-      refreshToken: createRefreshToken({ email })
+      password: hashPassword(password)
     }
     createUser(user)
 
@@ -52,12 +51,11 @@ router.post('/signin', async (req, res, next) => {
     }
 
     // update de the refresh token
-    const updatedUser = await updateUser({ email }, { refreshToken: createRefreshToken({ email }) })
+    const accessToken = createAccessToken({ email: user.email, id: user.id })
+    const updatedUser = await updateUser({ email }, { refreshToken: createRefreshToken({ email, accessToken: accessToken }) })
 
     return res.status(200).json({
-      success: 'success signin',
-      refreshToken: updatedUser.refreshToken,
-      accessToken: createAccessToken({ email }),
+      accessToken: accessToken,
       user: {
         email: updatedUser.email
       }

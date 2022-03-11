@@ -1,5 +1,5 @@
-import { getUser } from '../../database/user'
-import { createAccessToken, verifyAccessToken, verifyRefreshToken } from '../../token'
+import { getUser, updateUser } from '../../database/user'
+import { createAccessToken, createRefreshToken, decodeRefreshToken, verifyAccessToken, verifyRefreshToken } from '../../token'
 
 /**
  * check if the user is authenticated by checking the access token and refresh token
@@ -9,12 +9,12 @@ import { createAccessToken, verifyAccessToken, verifyRefreshToken } from '../../
  */
 const isAuthenticated = async (req, res, next) => {
   try {
-    let token = req.get('authorization')
-    if (!token) {
+    let accessToken = req.get('authorization')
+    if (!accessToken) {
       throw new Error('missing_token')
     }
-    token = token.split(' ')[1]
-    const decoded = verifyAccessToken(token)
+    accessToken = accessToken.split(' ')[1]
+    const decoded = verifyAccessToken(accessToken)
     console.log(decoded)
     if (!decoded.tokenInfos) {
       throw new Error('invalid_authentication')
@@ -25,12 +25,20 @@ const isAuthenticated = async (req, res, next) => {
       const userRefreshToken = user.refreshToken
       // verify refresh token
       verifyRefreshToken(userRefreshToken)
-      // create new access token
-      const newAccessToken = createAccessToken({ email: user.email })
-      req.accessToken = newAccessToken
+      const decodedRefreshToken = await decodeRefreshToken(userRefreshToken)
+      if (decodedRefreshToken.accessToken === accessToken) {
+        // update refresh token
+        const newAccessToken = createAccessToken({ email: user.email, id: user.id })
+        updateUser({ _id: user._id }, { refreshToken: createRefreshToken({ email: user.email, accessToken: newAccessToken }) })
+        req.accessToken = newAccessToken
+        next()
+      } else {
+        throw new Error('invalid_authentication')
+      }
+    } else {
+      req.accessToken = accessToken
       next()
     }
-    next()
   } catch (error) {
     error.message = 'invalid_authentication'
     next(error)

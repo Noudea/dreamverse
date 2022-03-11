@@ -5,7 +5,7 @@ import MainStack from './mainStack/MainStack'
 
 function Stack () {
   const { state } = useAuth()
-  if (state.user && state.token) {
+  if (state.user && state.accessToken) {
     return (
       <MainStack />
     )

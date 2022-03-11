@@ -13,9 +13,12 @@ const DreamSchema = new Schema({
   description: {
     type: String
   },
-  tag: {
+  category: {
     type: String,
     enum: ['lucid', 'nightmare']
+  },
+  tags: {
+    type: Array
   },
   user: {
     type: mongoose.Schema.Types.ObjectId, ref: 'User'

@@ -11,7 +11,7 @@ const actionTypes = {
 }
 
 const initialState = {
-  token: null,
+  accessToken: null,
   user: null,
   error: null,
   loading: false
@@ -21,7 +21,7 @@ const AuthReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.LOGIN:
       return {
-        ...initialState, token: action.data.token, user: action.data.user
+        ...initialState, accessToken: action.data.accessToken, user: action.data.user
       }
     case actionTypes.ERROR:
       return {
@@ -53,7 +53,7 @@ const loginUser = async (credentials, dispatch) => {
   try {
     dispatch({
       type: actionTypes.LOGIN,
-      data: { user: credentials.user, token: credentials.token }
+      data: { user: credentials.user, accessToken: credentials.accessToken }
     })
   } catch (error) {
     dispatch({
