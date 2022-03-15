@@ -1,21 +1,14 @@
 import React from 'react'
-import { Pressable, Text, TouchableOpacity, View } from 'react-native'
-import { Icon } from 'react-native-elements'
-import { color } from '../../../theme'
+import { Text, TouchableOpacity } from 'react-native'
+import { Emote } from '../../atomes/emotes'
 
 import styles from './styles'
 
-const FeelingCard = ({ text, onPress }) => {
+const FeelingCard = ({ text, onPress, emote }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
+      <Emote size='medium' name={emote} />
       <Text style={styles.text}>{text}</Text>
-      <Icon
-        reverse
-        name='chevron-right'
-        type='feather'
-        size={20}
-        color={color.baseColor}
-      />
     </TouchableOpacity>
   )
 }

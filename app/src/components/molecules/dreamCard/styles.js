@@ -4,24 +4,22 @@ import { color } from '../../../theme'
 const styles = StyleSheet.create({
   container: {
     backgroundColor: color.baseColor,
-    padding: 20,
+    padding: 16,
     borderRadius: 16,
     marginBottom: 20
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: 'space-between'
   },
   title: {
-    color: color.textColor,
     fontSize: 24,
-    fontWeight: 'bold'
+    textTransform: 'capitalize'
   },
   date: {
     color: color.textColor
   },
-  badgeContainer: {
+  emoteContainer: {
     flexDirection: 'row'
   },
   text: {

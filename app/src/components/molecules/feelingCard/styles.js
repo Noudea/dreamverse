@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     height: 50,
     paddingLeft: 30,
     backgroundColor: color.baseColor,
@@ -16,7 +15,8 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontFamily: 'Poppins-Bold',
+    marginLeft: 20
   },
   next: {
     color: 'white',

@@ -31,7 +31,7 @@ const SignUpScreen = ({ navigation }) => {
         <Text style={styles.title}>Dreamverse</Text>
         <Text style={styles.subTitle}>Start your journey now</Text>
       </WithMargin>
-      <WithMargin margin={{ bottom: 12 }}>
+      <WithMargin width='100%' margin={{ bottom: 12 }}>
         <IconInput
           placeholder='Email address'
           name='mail' type='feather'
@@ -40,7 +40,7 @@ const SignUpScreen = ({ navigation }) => {
           }}
         />
       </WithMargin>
-      <WithMargin margin={{ bottom: 12 }}>
+      <WithMargin width='100%' margin={{ bottom: 12 }}>
         <IconInput
           placeholder='Password'
           name='lock'
@@ -50,7 +50,7 @@ const SignUpScreen = ({ navigation }) => {
           }}
         />
       </WithMargin>
-      <WithMargin margin={{ bottom: 12 }}>
+      <WithMargin width='100%' margin={{ bottom: 12 }}>
         <IconInput
           placeholder='Password'
           name='smartphone'

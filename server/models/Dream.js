@@ -10,8 +10,23 @@ const DreamSchema = new Schema({
   content: {
     type: String
   },
-  description: {
+  interpretation: {
     type: String
+  },
+  sleepQuality: {
+    type: String
+  },
+  dreamClarity: {
+    type: String
+  },
+  isLucid: {
+    type: Boolean
+  },
+  isNightmare: {
+    type: Boolean
+  },
+  date: {
+    type: Date
   },
   category: {
     type: String,

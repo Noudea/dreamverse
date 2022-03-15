@@ -34,26 +34,22 @@ router.get('/:dreamId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     // request body
-    const { title, content, description, tags, category } = req.body
-    console.log('access token', req.accessToken)
+    const dream = req.body
+
     // dream object
     const dreamObj = {
-      title: title,
-      content: content,
-      description: description,
-      tags: tags,
-      category: category,
+      ...dream,
       user: await decodeAccessToken(req.accessToken).user.id
     }
     // data validation
-    if (!title || !content || !description) {
+    if (!dream.title) {
       throw new Error('invalid_request')
     }
     // create dream
-    const dream = await createDream(dreamObj)
+    const createdDream = await createDream(dreamObj)
     // send response
     return res.status(201).json({
-      dream,
+      createdDream,
       accessToken: req.accessToken
     })
   } catch (error) {

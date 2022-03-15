@@ -6,6 +6,7 @@ import { color } from '../../theme'
 import WithMargin from '../../components/templates/WithMargin'
 import { loginUser, useAuth } from '../../contexts/authContext/AuthContext'
 import { customAxios } from '../../services/api'
+import globalStyles from '../../styles/globalStyles'
 const LoginScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
     email: 'tests@dreamverse.com',
@@ -33,10 +34,10 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.view}>
       <WithMargin margin={{ bottom: 40 }}>
-        <Text style={styles.title}>Dreamverse</Text>
+        <Text style={[globalStyles.textBold, styles.title]}>Dreamverse</Text>
         <Text style={styles.subTitle}>Start your journey now</Text>
       </WithMargin>
-      <WithMargin margin={{ bottom: 12 }}>
+      <WithMargin width='100%' margin={{ bottom: 12 }}>
         <IconInput
           placeholder='Email address'
           name='mail'
@@ -46,7 +47,7 @@ const LoginScreen = ({ navigation }) => {
           }}
         />
       </WithMargin>
-      <WithMargin margin={{ bottom: 12 }}>
+      <WithMargin width='100%' margin={{ bottom: 12 }}>
         <IconInput
           placeholder='Password'
           name='lock'
@@ -113,9 +114,7 @@ const styles = StyleSheet.create({
     zIndex: 5
   },
   title: {
-    fontSize: 56,
-    fontFamily: 'Roboto',
-    color: 'white'
+    fontSize: 48
   },
   subTitle: {
     fontSize: 20,

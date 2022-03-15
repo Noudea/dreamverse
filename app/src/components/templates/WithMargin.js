@@ -8,7 +8,7 @@ const WithMargin = ({ children, ...props }) => {
       marginBottom: props.margin.bottom,
       marginRight: props.margin.right,
       marginLeft: props.margin.left,
-      width: '100%'
+      width: props.width || null
     }
   })
 
