@@ -3,10 +3,11 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Button from '../../components/atomes/buttons/Button'
 import IconInput from '../../components/atomes/inputs/iconInput/IconInput'
 import { color } from '../../theme'
-import WithMargin from '../../components/templates/WithMargin'
+
 import { loginUser, useAuth } from '../../contexts/authContext/AuthContext'
 import { customAxios } from '../../services/api'
 import globalStyles from '../../styles/globalStyles'
+import { WithMargin } from '../../components/templates'
 const LoginScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
     email: 'tests@dreamverse.com',

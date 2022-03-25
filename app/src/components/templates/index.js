@@ -1,3 +1,7 @@
 import ColumnList from './lists/columnList/ColumnList'
+import WithMargin from './withMargin/WithMargin'
 
-export { ColumnList }
+export {
+  ColumnList,
+  WithMargin
+}

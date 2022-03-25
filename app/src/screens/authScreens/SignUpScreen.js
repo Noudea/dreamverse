@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Button from '../../components/atomes/buttons/Button'
 import IconInput from '../../components/atomes/inputs/iconInput/IconInput'
-import WithMargin from '../../components/templates/WithMargin'
+import { WithMargin } from '../../components/templates'
+
 import { customAxios } from '../../services/api'
 import { color } from '../../theme'
 

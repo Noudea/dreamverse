@@ -1,10 +1,9 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
-import { Emote } from '../../atomes/emotes'
-
+import { Emote } from '../../../atomes/emotes'
 import styles from './styles'
 
-const FeelingCard = ({ text, onPress, emote }) => {
+const AnswerIconCard = ({ text, onPress, emote }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <Emote size='medium' name={emote} />
@@ -13,4 +12,4 @@ const FeelingCard = ({ text, onPress, emote }) => {
   )
 }
 
-export default FeelingCard
+export default AnswerIconCard

@@ -14,9 +14,9 @@ function MainStack () {
         headerShown: false
       }}
     >
+      <MainNavigator.Screen options={{ headerShown: false }} name='createDreamScreen' component={createDreamScreen} />
       <MainNavigator.Screen options={{ headerShown: false }} name='DreamJournalScreen' component={dreamJournalScreen} />
       <MainNavigator.Screen options={{ headerShown: false }} name='DreamSearchScreen' component={DreamSearchScreen} />
-      <MainNavigator.Screen options={{ headerShown: false }} name='createDreamScreen' component={createDreamScreen} />
     </MainNavigator.Navigator>
   )
 }

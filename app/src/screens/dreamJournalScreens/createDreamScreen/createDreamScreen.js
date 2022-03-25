@@ -5,11 +5,11 @@ import globalStyles from '../../../styles/globalStyles'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment'
 import styles from './styles'
-import { FeelingCard } from '../../../components/molecules'
 import LineInput from '../../../components/atomes/inputs/lineInput/LineInput'
 import { EmoteButton } from '../../../components/atomes/buttons'
 import { customAxios } from '../../../services/api'
 import { Emote } from '../../../components/atomes/emotes'
+import { AnswerIconCard } from '../../../components/molecules'
 
 function createDreamScreen () {
   const scrollRef = useRef(null)
@@ -67,9 +67,9 @@ function createDreamScreen () {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <ScrollView ref={scrollRef} snapToInterval={windowWidth} decelerationRate='fast' horizontal disableIntervalMomentum pagingEnabled indicatorStyle='white'>
         <View style={globalStyles.screenContainer}>
-          <Text style={styles.headerText}>Create your dream</Text>
+          <Text style={[globalStyles.textBold,styles.headerText]}>Create your dream</Text>
           <View style={styles.titleContainer}>
-            <Text style={styles.text}>Title</Text>
+            <Text style={[globalStyles.text,styles.text]}>Title</Text>
             <LineInput
               onChangeText={
                 (e) => {
@@ -80,7 +80,7 @@ function createDreamScreen () {
             />
           </View>
           <View style={styles.dateContainer}>
-            <Text style={styles.text}>Date</Text>
+            <Text style={[globalStyles.text,styles.text]}>Date</Text>
             <DateInput onPress={showDatepicker} date={moment(date).format('MMMM Do YYYY')} />
           </View>
           {show && (
@@ -95,7 +95,7 @@ function createDreamScreen () {
           )}
         </View>
         <View style={globalStyles.screenContainer}>
-          {!typing && <Text style={styles.headerText}>What happened in your dream ?</Text>}
+          {!typing && <Text style={[globalStyles.textBold,styles.headerText]}>What happened in your dream ?</Text>}
           <LineInput
             onBlur={() => { setTyping(false) }}
             onFocus={() => { setTyping(true) }}
@@ -109,7 +109,7 @@ function createDreamScreen () {
           />
         </View>
         <View style={globalStyles.screenContainer}>
-          {!typing && <Text style={styles.headerText}>How do you interpret your dream ?</Text>}
+          {!typing && <Text style={[globalStyles.textBold,styles.headerText]}>How do you interpret your dream ?</Text>}
           <LineInput
             onBlur={() => { setTyping(false) }}
             onFocus={() => { setTyping(true) }}
@@ -123,15 +123,15 @@ function createDreamScreen () {
           />
         </View>
         <View style={globalStyles.screenContainer}>
-          <Text style={styles.headerText}>Was your dream lucid ?</Text>
-          <FeelingCard
+          <Text style={[globalStyles.textBold,styles.headerText]}>Was your dream lucid ?</Text>
+          <AnswerIconCard
             emote='lucide' onPress={() => {
               setFormData({ ...formData, isLucid: true })
               scrollTo(4)
             }}
             text='Yes'
           />
-          <FeelingCard
+          <AnswerIconCard
             emote='no'
             onPress={() => {
               setFormData({ ...formData, isLucid: false })
@@ -140,8 +140,8 @@ function createDreamScreen () {
           />
         </View>
         <View style={globalStyles.screenContainer}>
-          <Text style={styles.headerText}>Was your dream a nightmare ?</Text>
-          <FeelingCard
+          <Text style={[globalStyles.textBold,styles.headerText]}>Was your dream a nightmare ?</Text>
+          <AnswerIconCard
             emote='nightmare'
             onPress={() => {
               setFormData({ ...formData, isNightmare: true })
@@ -149,7 +149,7 @@ function createDreamScreen () {
             }}
             text='Yes'
           />
-          <FeelingCard
+          <AnswerIconCard
             emote='no'
             onPress={() => {
               setFormData({ ...formData, isNightmare: false })
@@ -159,7 +159,7 @@ function createDreamScreen () {
           />
         </View>
         <View style={globalStyles.screenContainer}>
-          <Text style={styles.headerText}>How was your sleep ?</Text>
+          <Text style={[globalStyles.textBold,styles.headerText]}>How was your sleep ?</Text>
           <View style={styles.emoteContainer}>
             <EmoteButton emote='bad' isSelected={formData.sleepQuality === 'bad'} onPress={() => { setFormData({ ...formData, sleepQuality: 'bad' }) }} />
             <EmoteButton emote='normal' isSelected={formData.sleepQuality === 'normal'} onPress={() => { setFormData({ ...formData, sleepQuality: 'normal' }) }} />
@@ -168,11 +168,11 @@ function createDreamScreen () {
           </View>
           <View style={styles.selectedContainer}>
             <Emote size='large' name={formData.sleepQuality} />
-            <Text style={styles.selectedText}>{formData.sleepQuality}</Text>
+            <Text style={[globalStyles.textBold,styles.selectedText]}>{formData.sleepQuality}</Text>
           </View>
         </View>
         <View style={globalStyles.screenContainer}>
-          <Text style={styles.headerText}>How clear was your dream ?</Text>
+          <Text style={[globalStyles.textBold,styles.headerText]}>How clear was your dream ?</Text>
           <View style={styles.emoteContainer}>
             <EmoteButton emote='cloudy' isSelected={formData.dreamClarity === 'cloudy'} onPress={() => { setFormData({ ...formData, dreamClarity: 'cloudy' }) }} />
             <EmoteButton emote='normalCloud' isSelected={formData.dreamClarity === 'normalCloud'} onPress={() => { setFormData({ ...formData, dreamClarity: 'normal' }) }} />
@@ -181,11 +181,11 @@ function createDreamScreen () {
           </View>
           <View style={styles.selectedContainer}>
             <Emote size='large' name={formData.dreamClarity === 'normal' ? 'normalCloud' : formData.dreamClarity} />
-            <Text style={styles.selectedText}>{formData.dreamClarity}</Text>
+            <Text style={[globalStyles.textBold,styles.selectedText]}>{formData.dreamClarity}</Text>
           </View>
         </View>
         <View style={globalStyles.screenContainer}>
-          <Text style={styles.headerText}>Are you ready to save your dream ?</Text>
+          <Text style={[globalStyles.textBold,styles.headerText]}>Are you ready to save your dream ?</Text>
           <Button
             onPress={() => {
               saveDream()
@@ -194,7 +194,7 @@ function createDreamScreen () {
         </View>
       </ScrollView>
       <View style={styles.indicator}>
-        <Text style={styles.headerText}>test</Text>
+        <Text style={[globalStyles.textBold,styles.headerText]}>test</Text>
       </View>
     </View>
   )

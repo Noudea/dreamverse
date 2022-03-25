@@ -14,6 +14,10 @@ const globalStyles = StyleSheet.create({
   textBold: {
     fontFamily: 'Poppins-Bold',
     color: color.textColor
+  },
+  text : {
+    color: color.textColor,
+    fontFamily: 'Poppins-Regular',
   }
 })
 

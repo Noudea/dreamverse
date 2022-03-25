@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
-import { color } from '../../../theme'
+import { color } from '../../../../theme'
 
 function DreamCalendar () {
   const INITIAL_DATE = '2022-02-15'

@@ -1,12 +1,11 @@
 import moment from 'moment'
 import React from 'react'
 import { Pressable, Text, View } from 'react-native'
-import globalStyles from '../../../styles/globalStyles'
-import { Emote } from '../../atomes'
-import DreamBadge from '../../atomes/badges/dreamBadge/DreamBadge'
-import RowList from '../../templates/lists/rowList/RowList'
-import WithMargin from '../../templates/WithMargin'
+import {Emote} from '../../../atomes'
+import {WithMargin} from '../../../templates'
 import styles from './styles'
+import globalStyles from '../../../../styles/globalStyles'
+import { DreamBadge } from '../../../atomes'
 
 function DreamCard ({ title, tags, date, isLucid, isNightmare, content, interpretation, sleepQuality, dreamClarity, onPress }) {
   return (
@@ -22,10 +21,10 @@ function DreamCard ({ title, tags, date, isLucid, isNightmare, content, interpre
           {sleepQuality && <WithMargin margin={{ right: 10 }}><Emote name={sleepQuality} size='small' /></WithMargin>}
           {dreamClarity && <WithMargin margin={{ right: 10 }}><Emote name={dreamClarity} size='small' /></WithMargin>}
         </View>
-        <RowList listItems={tags.map((item, index) => {
+        {/* <RowList listItems={tags.map((item, index) => {
           return <DreamBadge key={index} id={index} category={item} />
         })}
-        />
+        /> */}
         {/* <Text style={styles.text}>{content}</Text> */}
       </View>
     </Pressable>

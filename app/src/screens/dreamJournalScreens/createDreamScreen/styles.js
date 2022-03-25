@@ -3,15 +3,11 @@ import { color } from '../../../theme'
 
 const styles = StyleSheet.create({
   text: {
-    color: color.textColor,
-    fontFamily: 'Poppins-Regular',
     fontSize: 18
   },
   headerText: {
-    color: color.textColor,
     fontSize: 40,
     marginBottom: 40,
-    fontFamily: 'Poppins-Bold'
   },
   dotContainer: {
     display: 'flex',
@@ -37,9 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   selectedText: {
-    color: color.textColor,
     fontSize: 30,
-    fontFamily: 'Poppins-Bold',
     marginLeft: 10,
     textTransform: 'capitalize'
   },
